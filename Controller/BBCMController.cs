@@ -8,6 +8,7 @@ using IBM.Data.DB2.Core;
 using System.Data;
 using System.Configuration;
 using Basic;
+using SQLUI;
 using System.Xml;
 namespace DB2VM.Controller
 {
@@ -15,7 +16,33 @@ namespace DB2VM.Controller
     [ApiController]
     public class BBCMController : ControllerBase
     {
-       
+        public enum enum_雲端藥檔
+        {
+            GUID,
+            藥品碼,
+            中文名稱,
+            藥品名稱,
+            藥品學名,
+            健保碼,
+            包裝單位,
+            包裝數量,
+            最小包裝單位,
+            最小包裝數量,
+            藥品條碼1,
+            藥品條碼2,
+            警訊藥品,
+            管制級別,
+        }
+
+        static string MySQL_server = $"{ConfigurationManager.AppSettings["MySQL_server"]}";
+        static string MySQL_database = $"{ConfigurationManager.AppSettings["MySQL_database"]}";
+        static string MySQL_userid = $"{ConfigurationManager.AppSettings["MySQL_user"]}";
+        static string MySQL_password = $"{ConfigurationManager.AppSettings["MySQL_password"]}";
+        static string MySQL_port = $"{ConfigurationManager.AppSettings["MySQL_port"]}";
+
+        private SQLControl sQLControl_藥檔資料 = new SQLControl(MySQL_server, MySQL_database, "medicine_page_cloud", MySQL_userid, MySQL_password, (uint)MySQL_port.StringToInt32(), MySql.Data.MySqlClient.MySqlSslMode.None);
+
+
         [HttpGet]
         public string Get(string Code)
         {
@@ -51,6 +78,31 @@ namespace DB2VM.Controller
             medClass.管制級別 = MLEVEL;
 
             medClasses.Add(medClass);
+
+            List<object[]> list_藥檔資料 = sQLControl_藥檔資料.GetRowsByDefult(null, (int)enum_雲端藥檔.藥品碼, MCODE);
+            if(list_藥檔資料.Count == 0)
+            {
+                object[] value = new object[new enum_雲端藥檔().GetLength()];
+                value[(int)enum_雲端藥檔.GUID] = Guid.NewGuid().ToString();
+                value[(int)enum_雲端藥檔.藥品碼] = medClass.藥品碼;
+                value[(int)enum_雲端藥檔.藥品名稱] = medClass.藥品名稱;
+                value[(int)enum_雲端藥檔.藥品學名] = medClass.藥品學名;
+                value[(int)enum_雲端藥檔.警訊藥品] = medClass.警訊藥品;
+                value[(int)enum_雲端藥檔.管制級別] = medClass.管制級別;
+                sQLControl_藥檔資料.AddRow(null, value);
+            }
+            else
+            {
+                object[] value = list_藥檔資料[0];
+                value[(int)enum_雲端藥檔.藥品碼] = medClass.藥品碼;
+                value[(int)enum_雲端藥檔.藥品名稱] = medClass.藥品名稱;
+                value[(int)enum_雲端藥檔.藥品學名] = medClass.藥品學名;
+                value[(int)enum_雲端藥檔.警訊藥品] = medClass.警訊藥品;
+                value[(int)enum_雲端藥檔.管制級別] = medClass.管制級別;
+                List<object[]> list = new List<object[]>();
+                list.Add(value);
+                sQLControl_藥檔資料.UpdateByDefulteExtra(null, list);
+            }
             //while (reader.Read())
             //{
             //    MedClass medClass = new MedClass();
