@@ -1499,19 +1499,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\HS\\.nuget\\packages\\": {}
+    "C:\\Users\\vendors\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\TPH_MMH_API-master\\DB2VM_API.csproj",
+      "projectUniqueName": "C:\\Users\\vendors\\Source\\Repos\\DB2VM_MMH_API\\DB2VM_API.csproj",
       "projectName": "DB2VM_API",
-      "projectPath": "C:\\TPH_MMH_API-master\\DB2VM_API.csproj",
-      "packagesPath": "C:\\Users\\HS\\.nuget\\packages\\",
-      "outputPath": "C:\\TPH_MMH_API-master\\obj\\",
+      "projectPath": "C:\\Users\\vendors\\Source\\Repos\\DB2VM_MMH_API\\DB2VM_API.csproj",
+      "packagesPath": "C:\\Users\\vendors\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\vendors\\Source\\Repos\\DB2VM_MMH_API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\HS\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\vendors\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -1580,7 +1580,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.415\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.416\\RuntimeIdentifierGraph.json"
       }
     }
   }
