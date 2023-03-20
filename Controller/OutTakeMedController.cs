@@ -17,8 +17,14 @@ namespace DB2VM_API
 {
     public class class_OutTakeMed_data
     {
+        [JsonPropertyName("PRI_KEY")]
+        public string PRI_KEY { get; set; }
         [JsonPropertyName("MC_name")]
         public string 電腦名稱 { get; set; }
+        [JsonPropertyName("cost_center")]
+        public string 成本中心 { get; set; }
+        [JsonPropertyName("src_storehouse")]
+        public string 來源庫別 { get; set; }
         [JsonPropertyName("code")]
         public string 藥品碼 { get; set; }
         [JsonPropertyName("value")]
