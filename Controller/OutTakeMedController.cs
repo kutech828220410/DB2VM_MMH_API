@@ -58,8 +58,14 @@ namespace DB2VM_API
         [HttpPost]
         public string Post([FromBody] List<class_OutTakeMed_data> data)
         {
+            if (data.Count == 0) return "";
             string json = data.JsonSerializationt();
-            string str = Basic.Net.WEBApiPostJson("http://10.14.16.50:443/api/OutTakeMed/", json);
+            string str = "";
+            if(data[0].成本中心 == "1")
+            {
+                str = Basic.Net.WEBApiPostJson("http://10.14.16.50:443/api/OutTakeMed/", json);
+            }
+           
             return str;
         }
     }
