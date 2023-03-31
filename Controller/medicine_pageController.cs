@@ -26,6 +26,10 @@ namespace DB2VM.Controller
             {
                 str = Basic.Net.WEBApiGet("http://10.14.16.50:443/api/medicine_page/storage_list");
             }
+            if (src_storehouse == "2")
+            {
+                str = Basic.Net.WEBApiGet("http://10.14.16.49:443/api/medicine_page/storage_list");
+            }
             return str;
         }
     }
