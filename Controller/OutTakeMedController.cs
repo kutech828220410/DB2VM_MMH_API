@@ -27,6 +27,10 @@ namespace DB2VM_API
         public string 來源庫別 { get; set; }
         [JsonPropertyName("code")]
         public string 藥品碼 { get; set; }
+        [JsonPropertyName("OD_type")]
+        public string 類別 { get; set; }
+        [JsonPropertyName("bed_code")]
+        public string 床號 { get; set; }
         [JsonPropertyName("value")]
         public string 交易量 { get; set; }
         [JsonPropertyName("operator")]

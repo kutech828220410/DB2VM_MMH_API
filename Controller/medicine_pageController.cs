@@ -10,7 +10,7 @@ using System.Configuration;
 using Basic;
 using SQLUI;
 using System.Xml;
-namespace DB2VM.Controller
+namespace DB2VM_API
 {
     [Route("api/[controller]")]
     [ApiController]
