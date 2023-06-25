@@ -637,3 +637,4 @@ C:\Users\vendors\Source\Repos\DB2VM_MMH_API\obj\Debug\net5.0\DB2VM_API.dll
 C:\Users\vendors\Source\Repos\DB2VM_MMH_API\obj\Debug\net5.0\ref\DB2VM_API.dll
 C:\Users\vendors\Source\Repos\DB2VM_MMH_API\obj\Debug\net5.0\DB2VM_API.pdb
 C:\Users\vendors\Source\Repos\DB2VM_MMH_API\obj\Debug\net5.0\DB2VM_API.genruntimeconfig.cache
+C:\Users\vendors\source\repos\DB2VM_MMH_API\bin\Debug\net5.0\HIS_DB_Lib.dll

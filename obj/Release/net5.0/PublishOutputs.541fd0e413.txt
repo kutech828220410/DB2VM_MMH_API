@@ -198,6 +198,7 @@ C:\Users\vendors\source\repos\DB2VM_MMH_API\obj\Release\net5.0\PubTmp\Out\runtim
 C:\Users\vendors\source\repos\DB2VM_MMH_API\obj\Release\net5.0\PubTmp\Out\runtimes\win\lib\netcoreapp3.1\System.Text.Encoding.CodePages.dll
 C:\Users\vendors\source\repos\DB2VM_MMH_API\obj\Release\net5.0\PubTmp\Out\runtimes\win\lib\netcoreapp3.1\System.Windows.Extensions.dll
 C:\Users\vendors\source\repos\DB2VM_MMH_API\obj\Release\net5.0\PubTmp\Out\Basic.dll
+C:\Users\vendors\source\repos\DB2VM_MMH_API\obj\Release\net5.0\PubTmp\Out\HIS_DB_Lib.dll
 C:\Users\vendors\source\repos\DB2VM_MMH_API\obj\Release\net5.0\PubTmp\Out\SQLUI.dll
 C:\Users\vendors\source\repos\DB2VM_MMH_API\obj\Release\net5.0\PubTmp\Out\MyUI.dll
 C:\Users\vendors\source\repos\DB2VM_MMH_API\obj\Release\net5.0\PubTmp\Out\LadderUI.dll
