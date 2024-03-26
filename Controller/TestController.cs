@@ -11,17 +11,16 @@ using Basic;
 using Oracle.ManagedDataAccess.Client;
 namespace DB2VM
 {
-    [Route("dbvm/[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class TestController : ControllerBase
     {
-   
         
         // GET api/values
         [HttpGet]
         public string Get()
         {
-            return $"WebApi is connected!";
+            return Basic.Net.WEBApiGet($"http://10.13.66.58:4433/api/test");
         }
 
 

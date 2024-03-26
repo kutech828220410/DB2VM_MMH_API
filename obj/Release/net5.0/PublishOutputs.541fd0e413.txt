@@ -211,9 +211,9 @@ C:\Users\vendors\source\repos\DB2VM_MMH_API\obj\Release\net5.0\PubTmp\Out\PortCo
 C:\Users\vendors\source\repos\DB2VM_MMH_API\obj\Release\net5.0\PubTmp\Out\LightControlUI.dll
 C:\Users\vendors\source\repos\DB2VM_MMH_API\obj\Release\net5.0\PubTmp\Out\ZealTechUI.dll
 C:\Users\vendors\source\repos\DB2VM_MMH_API\obj\Release\net5.0\PubTmp\Out\HCGUI.dll
+C:\Users\vendors\source\repos\DB2VM_MMH_API\obj\Release\net5.0\PubTmp\Out\DrawingClass.dll
 C:\Users\vendors\source\repos\DB2VM_MMH_API\obj\Release\net5.0\PubTmp\Out\TCP.dll
 C:\Users\vendors\source\repos\DB2VM_MMH_API\obj\Release\net5.0\PubTmp\Out\CallBackUI.dll
-C:\Users\vendors\source\repos\DB2VM_MMH_API\obj\Release\net5.0\PubTmp\Out\DrawingClass.dll
 C:\Users\vendors\source\repos\DB2VM_MMH_API\obj\Release\net5.0\PubTmp\Out\MVSDK.dll
 C:\Users\vendors\source\repos\DB2VM_MMH_API\obj\Release\net5.0\PubTmp\Out\DB2VM_API.Views.dll
 C:\Users\vendors\source\repos\DB2VM_MMH_API\obj\Release\net5.0\PubTmp\Out\DB2VM_API.Views.pdb

@@ -44,14 +44,14 @@ namespace DB2VM_API
         public string POST_UD1F_login([FromBody] returnData returnData)
         {
             SQLControl sQLControl_person_page = new SQLControl(server, database, "person_page", userid, password, port, SSLMode);
-            sessionClass data = HIS_DB_Lib.sessionClass.ObjToClass(returnData.Data);
+            sessionClass data = returnData.Data.ObjToClass<HIS_DB_Lib.sessionClass>();
             List<object[]> list_person_page = sQLControl_person_page.GetAllRows(null);
             List<object[]> list_person_page_buf = new List<object[]>();
             string ID = data.ID;
             string Password = data.Password;
             HIS_login hIS_Login = new HIS_login();
             hIS_Login.Hosp = "1";
-            hIS_Login.Id = ID;
+            hIS_Login.Id = ID.ToUpper();
             hIS_Login.Password = Password;
             hIS_Login.APName = "LESHINEDISPENSING";
             string json_result = Net.WEBApiPostJson("https://tpexm.mmh.org.tw/webemrapia232/api/login", hIS_Login.JsonSerializationt());

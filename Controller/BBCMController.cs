@@ -10,29 +10,14 @@ using System.Configuration;
 using Basic;
 using SQLUI;
 using System.Xml;
+using HIS_DB_Lib;
 namespace DB2VM.Controller
 {
     [Route("dbvm/[controller]")]
     [ApiController]
     public class BBCMController : ControllerBase
     {
-        public enum enum_雲端藥檔
-        {
-            GUID,
-            藥品碼,
-            中文名稱,
-            藥品名稱,
-            藥品學名,
-            健保碼,
-            包裝單位,
-            包裝數量,
-            最小包裝單位,
-            最小包裝數量,
-            藥品條碼1,
-            藥品條碼2,
-            警訊藥品,
-            管制級別,
-        }
+
 
         static string MySQL_server = $"{ConfigurationManager.AppSettings["MySQL_server"]}";
         static string MySQL_database = $"{ConfigurationManager.AppSettings["MySQL_database"]}";
@@ -103,22 +88,7 @@ namespace DB2VM.Controller
                 list.Add(value);
                 sQLControl_藥檔資料.UpdateByDefulteExtra(null, list);
             }
-            //while (reader.Read())
-            //{
-            //    MedClass medClass = new MedClass();
-            //    medClass.藥品碼 = reader["UDDRGNO"].ToString().Trim();
-            //    medClass.藥品名稱 = reader["UDARNAME"].ToString().Trim();
-            //    medClass.料號 = reader["UDSTOKNO"].ToString().Trim();
-            //    medClass.ATC主碼 = reader["UDATC"].ToString().Trim();
-            //    medClass.藥品條碼1 = reader["UDBARCD1"].ToString().Trim();
-            //    medClass.藥品條碼2 = reader["UDBARCD2"].ToString().Trim();
-            //    medClass.藥品條碼3 = reader["UDBARCD3"].ToString().Trim();
-            //    medClass.藥品條碼4 = reader["UDBARCD4"].ToString().Trim();
-            //    medClass.藥品條碼5 = reader["UDBARCD5"].ToString().Trim();
-
-
-            //    medClasses.Add(medClass);
-            //}
+  
 
             if (medClasses.Count == 0) return "[]";
             string jsonString = medClasses.JsonSerializationt();

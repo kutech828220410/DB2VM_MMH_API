@@ -23,6 +23,18 @@ namespace DB2VM
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder =>
+                {
+                    builder
+                        .SetIsOriginAllowed(origin => true)
+                        .AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader();
+                });
+
+            });
             services.AddControllers();
         }
 
@@ -34,11 +46,17 @@ namespace DB2VM
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors(builder =>
+            {
+                builder.AllowAnyHeader().AllowAnyMethod().SetIsOriginAllowed(_ => true).AllowCredentials();
+            });
             app.UseHttpsRedirection();
-
             app.UseRouting();
-
+            app.UseCors(); // ±Ò¥ÎCORS
             app.UseAuthorization();
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+            app.UseWebSockets();
 
             app.UseEndpoints(endpoints =>
             {

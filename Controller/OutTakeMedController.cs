@@ -13,49 +13,29 @@ using System.Net;
 using System.Net.Http;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using MySql.Data.MySqlClient;
+using HIS_DB_Lib;
 namespace DB2VM_API
 {
-    public class class_OutTakeMed_data
-    {
-        [JsonPropertyName("PRI_KEY")]
-        public string PRI_KEY { get; set; }
-        [JsonPropertyName("MC_name")]
-        public string 電腦名稱 { get; set; }
-        [JsonPropertyName("cost_center")]
-        public string 成本中心 { get; set; }
-        [JsonPropertyName("src_storehouse")]
-        public string 來源庫別 { get; set; }
-        [JsonPropertyName("code")]
-        public string 藥品碼 { get; set; }
-        [JsonPropertyName("OD_type")]
-        public string 類別 { get; set; }
-        [JsonPropertyName("bed_code")]
-        public string 床號 { get; set; }
-        [JsonPropertyName("value")]
-        public string 交易量 { get; set; }
-        [JsonPropertyName("operator")]
-        public string 操作人 { get; set; }
-        [JsonPropertyName("ID")]
-        public string ID { get; set; }
-        [JsonPropertyName("patient_name")]
-        public string 病人姓名 { get; set; }
-        [JsonPropertyName("patient_code")]
-        public string 病歷號 { get; set; }
-        [JsonPropertyName("prescription_time")]
-        public string 開方時間 { get; set; }
-        [JsonPropertyName("OP_type")]
-        public string 功能類型 { get; set; }
-    }
-
+   
     [Route("api/[controller]")]
     [ApiController]
     public class OutTakeMedController
     {
+        [Route("log")]
+        [HttpGet()]
+        public string Get_log()
+        {
+            SQLUI.SQLControl sQLControl = new SQLUI.SQLControl("127.0.0.1", "dbvm", "log", "user", "66437068", 3306, MySqlSslMode.None);
+            List<object[]> list_value = sQLControl.GetAllRows(null);
+
+            return list_value.JsonSerializationt(true);
+        }
         [Route("Sample")]
         [HttpGet()]
         public string Get_Sample()
         {
-            string str = Basic.Net.WEBApiGet(@"http://10.14.16.50:443/api/OutTakeMed/Sample");
+            string str = Basic.Net.WEBApiGet(@"http://10.13.66.58:4433/api/OutTakeMed/Sample");
 
             return str;
         }
@@ -65,13 +45,26 @@ namespace DB2VM_API
             if (data.Count == 0) return "";
             string json = data.JsonSerializationt();
             string str = "";
-            if(data[0].成本中心 == "1")
+            //SQLUI.SQLControl sQLControl = new SQLUI.SQLControl("127.0.0.1", "dbvm", "log", "user", "66437068", 3306, MySqlSslMode.None);
+            //object[] value = new object[3];
+            //value[0] = Guid.NewGuid().ToString();
+            //value[1] = DateTime.Now.ToDateTimeString();
+            //value[2] = data.JsonSerializationt(false);
+            //sQLControl.AddRow(null, value);
+
+            if (data[0].成本中心 == "1")
             {
-                str = Basic.Net.WEBApiPostJson("http://10.14.16.50:443/api/OutTakeMed/", json);
+                returnData returnData = new returnData();
+                returnData.ServerName = "B1UD";
+                returnData.Data = data;
+                str = Basic.Net.WEBApiPostJson("http://10.13.66.58:4433/api/OutTakeMed/new", returnData.JsonSerializationt());
             }
             if (data[0].成本中心 == "2")
             {
-                str = Basic.Net.WEBApiPostJson("http://10.14.16.49:443/api/OutTakeMed/", json);
+                returnData returnData = new returnData();
+                returnData.ServerName = "B2UD";
+                returnData.Data = data;
+                str = Basic.Net.WEBApiPostJson("http://10.13.66.58:4433/api/OutTakeMed/new", returnData.JsonSerializationt());
             }
             return str;
         }
