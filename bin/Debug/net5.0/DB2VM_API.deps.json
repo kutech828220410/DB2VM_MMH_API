@@ -919,6 +919,14 @@
           }
         }
       },
+      "DrawingClass/1.0.0.5": {
+        "runtime": {
+          "DrawingClass.dll": {
+            "assemblyVersion": "1.0.0.5",
+            "fileVersion": "1.0.0.5"
+          }
+        }
+      },
       "TCP/1.0.0.0": {
         "runtime": {
           "TCP.dll": {
@@ -932,14 +940,6 @@
           "CallBackUI.dll": {
             "assemblyVersion": "1.0.0.1",
             "fileVersion": "1.0.0.1"
-          }
-        }
-      },
-      "DrawingClass/1.0.0.5": {
-        "runtime": {
-          "DrawingClass.dll": {
-            "assemblyVersion": "1.0.0.5",
-            "fileVersion": "1.0.0.5"
           }
         }
       },
@@ -2888,17 +2888,17 @@
       "serviceable": false,
       "sha512": ""
     },
+    "DrawingClass/1.0.0.5": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
     "TCP/1.0.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""
     },
     "CallBackUI/1.0.0.1": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "DrawingClass/1.0.0.5": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""
