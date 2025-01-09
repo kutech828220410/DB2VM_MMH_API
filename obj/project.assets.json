@@ -11,6 +11,15 @@
           "lib/netstandard2.0/BouncyCastle.Crypto.dll": {}
         }
       },
+      "ExcelDataReader/3.7.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.1/ExcelDataReader.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.1/ExcelDataReader.dll": {}
+        }
+      },
       "Google.Protobuf/3.19.4": {
         "type": "package",
         "compile": {
@@ -521,6 +530,28 @@
         "lib/netstandard2.0/BouncyCastle.Crypto.xml",
         "lib/xamarinios/BouncyCastle.Crypto.dll",
         "lib/xamarinios/BouncyCastle.Crypto.xml"
+      ]
+    },
+    "ExcelDataReader/3.7.0": {
+      "sha512": "AMv3oDETRHSRyXC17rBtKH45qIfFyo433LMeaMB3u4RNr/c9Luuc0Z+JMP6+3Cx9n4wXqFqcrEIVxrf/GgYnZg==",
+      "type": "package",
+      "path": "exceldatareader/3.7.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "ExcelDataReader.png",
+        "README.md",
+        "exceldatareader.3.7.0.nupkg.sha512",
+        "exceldatareader.nuspec",
+        "lib/net462/ExcelDataReader.dll",
+        "lib/net462/ExcelDataReader.pdb",
+        "lib/net462/ExcelDataReader.xml",
+        "lib/netstandard2.0/ExcelDataReader.dll",
+        "lib/netstandard2.0/ExcelDataReader.pdb",
+        "lib/netstandard2.0/ExcelDataReader.xml",
+        "lib/netstandard2.1/ExcelDataReader.dll",
+        "lib/netstandard2.1/ExcelDataReader.pdb",
+        "lib/netstandard2.1/ExcelDataReader.xml"
       ]
     },
     "Google.Protobuf/3.19.4": {
@@ -1490,6 +1521,7 @@
   },
   "projectFileDependencyGroups": {
     "net5.0": [
+      "ExcelDataReader >= 3.7.0",
       "IBM.Data.DB2.Core >= 3.1.0.600",
       "MySql.Data >= 8.0.29",
       "Oracle.ManagedDataAccess.Core >= 3.21.90",
@@ -1499,19 +1531,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\vendors\\.nuget\\packages\\": {}
+    "C:\\Users\\Administrator\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\vendors\\Source\\Repos\\DB2VM_MMH_API\\DB2VM_API.csproj",
+      "projectUniqueName": "C:\\Users\\Administrator\\Source\\Repos\\DB2VM_MMH_API\\DB2VM_API.csproj",
       "projectName": "DB2VM_API",
-      "projectPath": "C:\\Users\\vendors\\Source\\Repos\\DB2VM_MMH_API\\DB2VM_API.csproj",
-      "packagesPath": "C:\\Users\\vendors\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\vendors\\Source\\Repos\\DB2VM_MMH_API\\obj\\",
+      "projectPath": "C:\\Users\\Administrator\\Source\\Repos\\DB2VM_MMH_API\\DB2VM_API.csproj",
+      "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Administrator\\Source\\Repos\\DB2VM_MMH_API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\vendors\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -1537,6 +1569,10 @@
       "net5.0": {
         "targetAlias": "net5.0",
         "dependencies": {
+          "ExcelDataReader": {
+            "target": "Package",
+            "version": "[3.7.0, )"
+          },
           "IBM.Data.DB2.Core": {
             "target": "Package",
             "version": "[3.1.0.600, )"
