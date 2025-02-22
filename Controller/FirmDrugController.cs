@@ -13,6 +13,8 @@ using System.Xml;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using H_Pannel_lib;
+using HIS_DB_Lib;
 namespace DB2VM_API
 {
     [Route("dbvm/[controller]")]
@@ -73,11 +75,12 @@ namespace DB2VM_API
             if (ID.StringIsEmpty()) ID = "";
             medicine_pageController medicine_PageController = new medicine_pageController();
             string str = medicine_PageController.Get_storage_list("1");
-            List<class_儲位總庫存表> list_storage_list = str.JsonDeserializet<List<class_儲位總庫存表>>();
-            List<class_儲位總庫存表> list_storage_list_buf = new List<class_儲位總庫存表>();
+            returnData returnData = str.JsonDeserializet<returnData>();
+            List<DeviceBasic> list_storage_list = returnData.Data.ObjToClass<List<DeviceBasic>>();
+            List<DeviceBasic> list_storage_list_buf = new List<DeviceBasic>();
             List<string> Codes = (from value in list_storage_list
-                                 where value.藥品碼.StringIsEmpty() == false
-                                 select value.藥品碼).Distinct().ToList();
+                                 where value.Code.StringIsEmpty() == false
+                                 select value.Code).Distinct().ToList();
             class_FirmDrug class_FirmDrug = new class_FirmDrug();
 
             class_FirmDrug.HOSPITAL = "1";
@@ -94,7 +97,7 @@ namespace DB2VM_API
             string FirmDrug_Json = class_FirmDrug.JsonSerializationt();
             string result = Basic.Net.WEBApiPostJson("https://tpord.mmh.org.tw/ADC_WEBAPI_A226/api/FirmDrug", FirmDrug_Json);
 
-            return result;
+            return $"{result}\n{FirmDrug_Json}";
         }
 
         [Route("B2UD")]
@@ -104,12 +107,15 @@ namespace DB2VM_API
             if (ID.StringIsEmpty()) ID = "";
             medicine_pageController medicine_PageController = new medicine_pageController();
             string str = medicine_PageController.Get_storage_list("2");
-            List<class_儲位總庫存表> list_storage_list = str.JsonDeserializet<List<class_儲位總庫存表>>();
-            List<class_儲位總庫存表> list_storage_list_buf = new List<class_儲位總庫存表>();
+            returnData returnData = str.JsonDeserializet<returnData>();
+            List<DeviceBasic> list_storage_list = returnData.Data.ObjToClass<List<DeviceBasic>>();
+            List<DeviceBasic> list_storage_list_buf = new List<DeviceBasic>();
             List<string> Codes = (from value in list_storage_list
-                                  where value.藥品碼.StringIsEmpty() == false
-                                  select value.藥品碼).Distinct().ToList();
+                                  where value.Code.StringIsEmpty() == false
+                                  select value.Code).Distinct().ToList();
             class_FirmDrug class_FirmDrug = new class_FirmDrug();
+
+            
 
             class_FirmDrug.HOSPITAL = "1";
             class_FirmDrug.DB = "OPD";
@@ -122,10 +128,11 @@ namespace DB2VM_API
                 class_FirmDrug.MCODE += Codes[i];
                 if (i != Codes.Count - 1) class_FirmDrug.MCODE += ",";
             }
+            class_FirmDrug.MCODE = "";
             string FirmDrug_Json = class_FirmDrug.JsonSerializationt();
             string result = Basic.Net.WEBApiPostJson("https://tpord.mmh.org.tw/ADC_WEBAPI_A226/api/FirmDrug", FirmDrug_Json);
 
-            return result;
+            return $"{result}\n{FirmDrug_Json}";
         }
 
     }

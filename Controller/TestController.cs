@@ -20,7 +20,7 @@ namespace DB2VM
         [HttpGet]
         public string Get()
         {
-            return Basic.Net.WEBApiGet($"http://10.14.16.50:4433/api/test");
+            return $"20250221 05:41\n{Basic.Net.WEBApiGet($"http://10.14.16.50:4433/api/test")}";
         }
 
 

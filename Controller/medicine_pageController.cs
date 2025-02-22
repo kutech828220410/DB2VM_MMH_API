@@ -24,11 +24,11 @@ namespace DB2VM_API
             string str = "";
             if(src_storehouse == "1")
             {
-                str = Basic.Net.WEBApiGet("http://10.14.16.50:443/api/medicine_page/storage_list");
+                str = Basic.Net.WEBApiGet("http://10.13.66.58:4433/api/device/list/B1UD");
             }
             if (src_storehouse == "2")
             {
-                str = Basic.Net.WEBApiGet("http://10.14.16.49:443/api/medicine_page/storage_list");
+                str = Basic.Net.WEBApiGet("http://10.13.66.58:4433/api/device/list/B2UD");
             }
             return str;
         }

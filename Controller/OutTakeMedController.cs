@@ -51,13 +51,16 @@ namespace DB2VM_API
             List<class_OutTakeMed_data> data_B2UD = (from temp in data
                                                      where temp.成本中心.ToUpper() == "2"
                                                      select temp).ToList();
-
+            Logger.Log("OutTakeMed_dataRev", $"{ data.JsonSerializationt()}");
             if (data[0].成本中心 == "1")
             {
                 returnData returnData = new returnData();
                 returnData.ServerName = "B1UD";
                 returnData.Data = data_B1UD;
-                json_out = Basic.Net.WEBApiPostJson("http://10.13.66.58:4433/api/OutTakeMed/new", returnData.JsonSerializationt());
+                string json_in = returnData.JsonSerializationt();
+                json_out = Basic.Net.WEBApiPostJson("http://10.13.66.58:4433/api/OutTakeMed/new", json_in);
+                Logger.Log("OutTakeMed_dataInput", $"{ json_in}");
+
                 returnData = json_out.JsonDeserializet<returnData>();
                 if (returnData == null)
                 {
@@ -68,13 +71,16 @@ namespace DB2VM_API
                     return "NG";
                 }
             }
-            if (data[0].成本中心 == "2")
+            else if (data[0].成本中心 == "2")
             {
                 returnData returnData = new returnData();
-                returnData.ServerName = "B2UD";
+                returnData.ServerName = "B1UD";
                 returnData.Data = data_B2UD;
-                json_out = Basic.Net.WEBApiPostJson("http://10.13.66.58:4433/api/OutTakeMed/new", returnData.JsonSerializationt());
+                string json_in = returnData.JsonSerializationt();
+                json_out = Basic.Net.WEBApiPostJson("http://10.13.66.58:4433/api/OutTakeMed/new", json_in);
+                Logger.Log("OutTakeMed_dataInput", $"{ json_in}");
                 returnData = json_out.JsonDeserializet<returnData>();
+                
                 if (returnData == null)
                 {
                     return "NG";
