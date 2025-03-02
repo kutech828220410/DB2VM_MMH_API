@@ -72,6 +72,7 @@ namespace DB2VM_API
         [HttpGet()]
         public string Get_B1UD(string? ID)
         {
+            //Logger.Log("ConsoleApp_FirmDrug", $"B1回寫藥品....");
             if (ID.StringIsEmpty()) ID = "";
             medicine_pageController medicine_PageController = new medicine_pageController();
             string str = medicine_PageController.Get_storage_list("1");
@@ -96,7 +97,7 @@ namespace DB2VM_API
             }
             string FirmDrug_Json = class_FirmDrug.JsonSerializationt();
             string result = Basic.Net.WEBApiPostJson("https://tpord.mmh.org.tw/ADC_WEBAPI_A226/api/FirmDrug", FirmDrug_Json);
-
+            //Logger.Log("ConsoleApp_FirmDrug", $"{result}\n{FirmDrug_Json}");
             return $"{result}\n{FirmDrug_Json}";
         }
 
@@ -104,6 +105,7 @@ namespace DB2VM_API
         [HttpGet()]
         public string Get_B2UD(string? ID)
         {
+            //Logger.Log("ConsoleApp_FirmDrug", $"B2回寫藥品....");
             if (ID.StringIsEmpty()) ID = "";
             medicine_pageController medicine_PageController = new medicine_pageController();
             string str = medicine_PageController.Get_storage_list("2");
@@ -128,10 +130,10 @@ namespace DB2VM_API
                 class_FirmDrug.MCODE += Codes[i];
                 if (i != Codes.Count - 1) class_FirmDrug.MCODE += ",";
             }
-            class_FirmDrug.MCODE = "";
+            //class_FirmDrug.MCODE = "";
             string FirmDrug_Json = class_FirmDrug.JsonSerializationt();
             string result = Basic.Net.WEBApiPostJson("https://tpord.mmh.org.tw/ADC_WEBAPI_A226/api/FirmDrug", FirmDrug_Json);
-
+            //Logger.Log("ConsoleApp_FirmDrug", $"{result}\n{FirmDrug_Json}");
             return $"{result}\n{FirmDrug_Json}";
         }
 

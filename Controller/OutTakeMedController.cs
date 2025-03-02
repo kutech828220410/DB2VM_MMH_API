@@ -74,7 +74,7 @@ namespace DB2VM_API
             else if (data[0].成本中心 == "2")
             {
                 returnData returnData = new returnData();
-                returnData.ServerName = "B1UD";
+                returnData.ServerName = "B2UD";
                 returnData.Data = data_B2UD;
                 string json_in = returnData.JsonSerializationt();
                 json_out = Basic.Net.WEBApiPostJson("http://10.13.66.58:4433/api/OutTakeMed/new", json_in);

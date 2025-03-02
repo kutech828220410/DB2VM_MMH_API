@@ -31,10 +31,11 @@ namespace DB2VM.Controller
         private SQLControl sQLControl_藥檔資料 = new SQLControl(MySQL_server, MySQL_database, "medicine_page_cloud", MySQL_userid, MySQL_password, (uint)MySQL_port.StringToInt32(), MySql.Data.MySqlClient.MySqlSslMode.None);
 
         static public string API_Server = "http://127.0.0.1:4433";
+
         [HttpGet]
         public string Get(string Code)
         {
-            if (Code.StringIsEmpty()) return "[]";
+            //if (Code.StringIsEmpty()) return "[]";
             System.Text.StringBuilder soap = new System.Text.StringBuilder();
             soap.Append("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
             soap.Append("<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">");
@@ -48,51 +49,56 @@ namespace DB2VM.Controller
             soap.Append("</soap:Body>");
             soap.Append("</soap:Envelope>");
             string Xml = Basic.Net.WebServicePost("https://tpord.mmh.org.tw/ADC_WS_A226/ADCDrugWS.asmx?op=Drug_DATA", soap);
-            //string[] Node_array = new string[] { "soap:Body", "Drug_DATAResponse", "Drug_DATAResult", "diffgr:diffgram", "NewDataSet", "Temp1"};
-            string[] Node_array = new string[] { "soap:Body", "Drug_DATAResponse", "Drug_DATAResult" };
+            //string[] Node_array = new string[] { "soap:Body", "Drug_DATAResponse", "Drug_DATAResult"};
+
+            string[] Node_array = new string[] { "soap:Body", "Drug_DATAResponse", "Drug_DATAResult", "diffgr:diffgram", "NewDataSet", "Temp1" };
+            //List<XmlElement> xmlElements = Xml.Xml_GetElements(Node_array);
+            //if (xmlElements == null || xmlElements.Count == 0) return "[]";
 
 
-            XmlElement xmlElement = Xml.Xml_GetElement(Node_array);
-            string MCODE = xmlElement.Xml_GetInnerXml("MCODE");
-            string FullName = xmlElement.Xml_GetInnerXml("FULLNAME");
-            string ShortName = xmlElement.Xml_GetInnerXml("SHORTNAME");
-            string COMPAR2 = xmlElement.Xml_GetInnerXml("COMPAR2");
-            string MLEVEL = xmlElement.Xml_GetInnerXml("MLEVEL");
-            if (MCODE.StringIsEmpty()) return "[]";
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.LoadXml(Xml);
+
+            // 定義 XPath 取得所有 Temp1 節點
+            XmlNamespaceManager nsManager = new XmlNamespaceManager(xmlDoc.NameTable);
+            nsManager.AddNamespace("soap", "http://schemas.xmlsoap.org/soap/envelope/");
+            nsManager.AddNamespace("diffgr", "urn:schemas-microsoft-com:xml-diffgram-v1");
+            nsManager.AddNamespace("msdata", "urn:schemas-microsoft-com:xml-msdata");
+
+            XmlNodeList temp1Nodes = xmlDoc.SelectNodes("//Temp1", nsManager);
             List<medClass> medClasses = new List<medClass>();
-            medClass medClass = new medClass();
-            medClass.藥品碼 = MCODE;
-            medClass.藥品名稱 = FullName;
-            medClass.藥品學名 = ShortName;
-            medClass.警訊藥品 = (COMPAR2 == "Y") ? "True" : "False";
-            medClass.管制級別 = MLEVEL;
 
-            medClasses.Add(medClass);
+            if (temp1Nodes == null || temp1Nodes.Count == 0)
+            {
+                return "[]";
+            }
 
-            //List<object[]> list_藥檔資料 = sQLControl_藥檔資料.GetRowsByDefult(null, (int)enum_雲端藥檔.藥品碼, MCODE);
-            //if(list_藥檔資料.Count == 0)
-            //{
-            //    object[] value = new object[new enum_雲端藥檔().GetLength()];
-            //    value[(int)enum_雲端藥檔.GUID] = Guid.NewGuid().ToString();
-            //    value[(int)enum_雲端藥檔.藥品碼] = medClass.藥品碼;
-            //    value[(int)enum_雲端藥檔.藥品名稱] = medClass.藥品名稱;
-            //    value[(int)enum_雲端藥檔.藥品學名] = medClass.藥品學名;
-            //    value[(int)enum_雲端藥檔.警訊藥品] = medClass.警訊藥品;
-            //    value[(int)enum_雲端藥檔.管制級別] = medClass.管制級別;
-            //    sQLControl_藥檔資料.AddRow(null, value);
-            //}
-            //else
-            //{
-            //    object[] value = list_藥檔資料[0];
-            //    value[(int)enum_雲端藥檔.藥品碼] = medClass.藥品碼;
-            //    value[(int)enum_雲端藥檔.藥品名稱] = medClass.藥品名稱;
-            //    value[(int)enum_雲端藥檔.藥品學名] = medClass.藥品學名;
-            //    value[(int)enum_雲端藥檔.警訊藥品] = medClass.警訊藥品;
-            //    value[(int)enum_雲端藥檔.管制級別] = medClass.管制級別;
-            //    List<object[]> list = new List<object[]>();
-            //    list.Add(value);
-            //    sQLControl_藥檔資料.UpdateByDefulteExtra(null, list);
-            //}
+            foreach (XmlNode node in temp1Nodes)
+            {
+                string MCODE = node.SelectSingleNode("MCODE")?.InnerText ?? "";
+                string FullName = node.SelectSingleNode("FULLNAME")?.InnerText ?? "";
+                string ShortName = node.SelectSingleNode("SHORTNAME")?.InnerText ?? "";
+                string COMPAR2 = node.SelectSingleNode("COMPAR2")?.InnerText ?? "";
+                string MLEVEL = node.SelectSingleNode("MLEVEL")?.InnerText ?? "";
+
+                // 檢查 MCODE 是否為空
+                if (string.IsNullOrWhiteSpace(MCODE)) continue;
+
+                medClass medClass = new medClass
+                {
+                    藥品碼 = MCODE,
+                    藥品名稱 = FullName,
+                    藥品學名 = ShortName,
+                    警訊藥品 = (COMPAR2 == "Y") ? "True" : "False",
+                    管制級別 = MLEVEL,
+                    中西藥 = "西藥"
+                };
+                medClasses.Add(medClass);
+
+            }
+
+            
+
             if (medClasses.Count == 0) return "[]";
             medClass.add_med_clouds(API_Server, medClasses);
             string jsonString = medClasses.JsonSerializationt();
